@@ -1,9 +1,9 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Home from './pages/Home'
-import Login from './pages/login'
-import Profile from './pages/Profile'
-import About from './pages/About'
-import Header from './components/Header'
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/login';
+import Profile from './pages/Profile';
+import About from './pages/About';
+import Header from './components/Header';
 
 export default function App() {
   return <BrowserRouter>

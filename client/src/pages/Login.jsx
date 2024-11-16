@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure, clearError } from '../redux/user/userSlice.js';
 import './Login.css';
+import OAuthsignup from '../components/OAuthsignup.jsx';
+import OAuthsignin from '../components/OAuthsignin.jsx';
 export default function Login() {
   const [isActive, setIsActive] = useState(false);
   const [formData, setFormData] = useState({});
@@ -98,12 +100,14 @@ export default function Login() {
       <div className="sign-up">
         <form onSubmit={handleSubmit}>
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ysGLsZfbPr6zprdlKrSSo30yCkac7NB9iw&s" alt="" className='img' />
-          <h1>Create Account</h1>
+          <h1>Real Estate</h1>
           <br />
+          <h2>Create Account</h2>
           <input type="text" placeholder="Username" required id='username' onChange={handleChange}/>
           <input type="text" placeholder="Email" required id='email' onChange={handleChange}/>
           <input type="password" placeholder="Password" required id='password' onChange={handleChange}/>
-          <button disabled={loading}>{loading ? 'Loading...' : 'Sign Up'}</button>
+          <button disabled={loading} style={{width: 280, fontSize: 14,}}>{loading ? 'Loading...' : 'Sign Up'}</button>
+          <OAuthsignup />
         </form>
       </div>
 
@@ -112,25 +116,26 @@ export default function Login() {
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ysGLsZfbPr6zprdlKrSSo30yCkac7NB9iw&s" alt="" className='img' />
           <h1>Real Estate</h1>
           <br />
-          <h2>Log In</h2>
+          <h2>Sign In</h2>
           <input type="text" placeholder="Email" required id='email2' onChange={handleChange}/>
           <input type="password" placeholder="Password" required id='password2' onChange={handleChange}/>
-          <button disabled={Loading}>{loading ? 'Loading...' : 'Sign In'}</button>
+          <button disabled={Loading} style={{width: 280, fontSize: 14,}}>{loading ? 'Loading...' : 'Sign In'}</button>
+          <OAuthsignin />
         </form>
       </div>
 
       <div className="toogle-container">
         <div className="toogle">
           <div className="toogle-panel toogle-left">
-            <h1>Welcome User!</h1>
+            <h1>Hello There!</h1>
             <p>If you already have an account</p>
             <button id="login" onClick={handleLoginClick}>
               Sign In
             </button>
           </div>
           <div className="toogle-panel toogle-right">
-            <h1>Hello, User!</h1>
-            <p>If you don't have an account</p>
+            <h1>Hello There!</h1>
+            <p>If you do not have an account</p>
             <button id="register" onClick={handleRegisterClick}>
               Sign Up
             </button>

@@ -73,7 +73,7 @@ export default function Login() {
           dispatch(signInFailure(Error.message));
       };
   };
-  console.log(formData);
+  // console.log(formData);
   const handleRegisterClick = () => {
     dispatch(clearError());
     setIsActive(true);
@@ -148,15 +148,13 @@ export default function Login() {
       justifyContent: 'center',
       marginTop: 5,
       padding: 0,
-      color: 'red',
-    }}><p>{error}</p></div>}
+    }}><p className='text-red-700'>{error}</p></div>}
     {Error && <div style={{
       display: 'flex',
       justifyContent: 'center',
       marginTop: 5,
       padding: 0,
-      color: 'red',
-    }}><p>{Error}</p></div>}
+    }}><p className='text-red-700'>{Error}</p></div>}
     </div>
     </div>
   );

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
+import cors from 'cors';
 import path from 'path';
 dotenv.config();
 
@@ -17,6 +18,15 @@ const __dirname = path.resolve();
 const app = express();
 
 app.use(express.json());
+
+app.use(cors({ origin: '*' }));
+
+// Use CORS middleware to allow cross-origin requests
+app.use(cors({
+    origin: '*', // Replace with your domain or use '*' for all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+}));
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000!');

@@ -1,0 +1,99 @@
+.add-property body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ededed;
+  color: #333;
+}
+
+.add-property .form-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-property .form-container h2 {
+  text-align: center;
+  color: #2d9c2d;
+  margin-bottom: 1rem;
+}
+
+.add-property form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.add-property form textarea {
+  resize: none;
+  height: 80px;
+  width: 100%;
+}
+
+.add-property .first {
+  width: 49%;
+}
+
+.add-property .second {
+  width: 49%;
+} */
+
+.add-property .checkbox-group {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.add-property .beds-baths input,
+.add-property .price-input input {
+  width: 48%;
+  margin-right: 20px;
+}
+
+.add-property .file-upload {
+  display: flex; /* Use flexbox to align items horizontally */
+  align-items: center; /* Vertically align the button and input */
+  gap: 10px; /* Add some space between the file input and the button */
+}
+
+.add-property .file-upload input {
+  margin-top: 10; /* Remove the top margin from the input */
+}
+
+.add-property .upload-button {
+  background-color: #2d9c2d;
+  color: #fff;
+  padding: 8px 16px; /* Adjust padding for better button appearance */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px; /* Make the button height match the input height */
+}
+
+.add-property .upload-button:hover {
+  background-color: #238823;
+
+}
+
+.add-property .submit-button {
+  background-color: #2d9c2d;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.add-property .submit-button:hover {
+  background-color: #238823;
+}

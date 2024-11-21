@@ -1,0 +1,145 @@
+.transaction-page #duaaa{
+  border-color: #008000;
+  border-width: 2px;
+}
+.transaction-page #op{
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  background-color: white;
+}
+.transaction-page .lol{
+  background-color: #41b06e;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 10px;
+  color: white;
+}
+.transaction-page .pop:hover{
+  background-color: #d6d7cf;
+  padding: 10px;
+  border-radius: 15px;
+  color: black;
+}
+.transaction-page .ImageH{
+  background-image: url(../src/components/image.png);
+  background-size: contain; /* Scale the image to fit inside the container */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-position: center; /* Center the image within the container */
+  align-content: flex-start;
+  flex-shrink: 0;
+  height: 100%;
+  width: 50%;
+  display: block;
+}
+.transaction-page .tup{
+  color: rgb(141, 144, 142);
+  font-weight: bolder;
+}
+.transaction-page select{
+  border: 1px solid #84a9af;
+  border-radius: 5px;
+  background-color: #ebe6e6;
+  color: #333;
+  padding: 5px;
+  font-size: 14px;
+  outline: none;
+}
+.transaction-page button{
+    padding: 10px;
+    border-radius: 20px;
+    border-color: #282c34;
+    border-width: 2px;
+}
+.transaction-page .confirm-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.transaction-page .confirm-button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.transaction-page .confirm-button:active:not(:disabled) {
+  background-color: linear-gradient(to bottom,#282c34,#f9f9f9);
+}
+.transaction-page .studs{
+  border-top-color: #008000;
+  border-width: 5px;
+  padding-top: 20px;
+  background-color: rgb(255, 255, 255);
+  padding-bottom: 20px;
+}
+.transaction-page .transaction-container {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  max-width: 900px;
+  margin: 20px auto;
+  height: auto;
+  background-color: linear-gradient(to bottom,#282c34,#f9f9f9);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+
+/* Page Title */
+.transaction-page .page-title {
+  text-align: center;
+  font-size: 2rem;
+  color: rgb(115, 115, 23); /* Green color */
+  margin-bottom: 20px;
+}
+
+
+/* Section Styling */
+.transaction-page .section-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: white; /* Green color */
+  display: inline-block;
+  padding-bottom: 5px;
+  text-align: left;
+}
+
+.transaction-page .property-details,
+.payment-details,
+.owner-details {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+}
+
+.transaction-page p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.transaction-page p strong {
+  color: rgb(141, 144, 142); /* Green color for emphasis */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .transaction-container {
+    padding: 15px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}

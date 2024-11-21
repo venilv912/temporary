@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure, clearError } from '../redux/user/userSlice.js';
 import './Login.css';
-import OAuthsignup from '../components/OAuthsignup.jsx';
-import OAuthsignin from '../components/OAuthsignin.jsx';
 export default function Login() {
   const [isActive, setIsActive] = useState(false);
   const [formData, setFormData] = useState({});
@@ -109,7 +107,6 @@ export default function Login() {
           <input type="text" placeholder="Email" required id='email' onChange={handleChange}/>
           <input type="password" placeholder="Password" required id='password' onChange={handleChange}/>
           <button disabled={loading} style={{width: 280, fontSize: 14,}}>{loading ? 'Loading...' : 'Sign Up'}</button>
-          <OAuthsignup />
         </form>
       </div>
 
@@ -122,7 +119,6 @@ export default function Login() {
           <input type="text" placeholder="Email" required id='email2' onChange={handleChange}/>
           <input type="password" placeholder="Password" required id='password2' onChange={handleChange}/>
           <button disabled={Loading} style={{width: 280, fontSize: 14,}}>{loading ? 'Loading...' : 'Sign In'}</button>
-          <OAuthsignin />
         </form>
       </div>
 

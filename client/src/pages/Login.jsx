@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInSuccess, signInFailure, clearError } from '../redux/user/userSlice.js';
 import './Login.css';
+
 export default function Login() {
   const [isActive, setIsActive] = useState(false);
   const [formData, setFormData] = useState({});
@@ -31,7 +32,7 @@ export default function Login() {
             });
             const data = await res.json();
             if (data.success === false) {
-                setError('Username or Email already Exists!');
+                setError(data.message);
                 setLoading(false);
                 return;
             }

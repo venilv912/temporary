@@ -3,6 +3,7 @@ import "./CreateListing.css";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase.js';
 import { useSelector } from 'react-redux';
+import './Style.css';
 
 const CreateListing = () => {
   const {currentUser} = useSelector(state => state.user);
@@ -292,7 +293,7 @@ const CreateListing = () => {
               onChange={handleChange}
               value={formData.price}
             />
-            <label>Regular Price (in ₹)</label>
+            <label>Regular Price (in {formData.type==='sale' ? '₹' : '₹/month'})</label>
           </div>
             </div>
             <div className={`second`}>

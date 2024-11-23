@@ -25,11 +25,10 @@ app.use(cookieParser());
 
 app.use(cors({ origin: '*' }));
 
-// Use CORS middleware to allow cross-origin requests
 app.use(cors({
-    origin: '*', // Replace with your domain or use '*' for all origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 app.listen(3000, () => {

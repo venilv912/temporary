@@ -5,6 +5,7 @@ import { app } from '../firebase.js';
 import { updateUserStart, updateUserSuccess, updateUserFailure, clearError, deleteUserStart, deleteUserSuccess, deleteUserFailure, signOutUserStart, signOutUserSuccess, signOutUserFailure } from '../redux/user/userSlice.js';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import './Style.css';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -28,6 +29,7 @@ export default function Profile() {
   const handleEditToggle = () => {
     dispatch(clearError());
     setUpdateSuccess(false);
+    setFormData({});
     if (isEditable) window.location.reload();
     setIsEditable(!isEditable);
   };
@@ -46,11 +48,11 @@ export default function Profile() {
       const data = await res.json();
       if (data.success===false)
       {
-        if (data.statusCode==500) data.message = 'Username and Email must be Unique!'
         dispatch(updateUserFailure(data.message));
         return;
       }
       dispatch(updateUserSuccess(data));
+      setFormData({});
       setUpdateSuccess(true);
       setIsEditable(false);
     } catch (error) {
@@ -201,7 +203,7 @@ export default function Profile() {
                 </td>
                 <td className="py-2 px-4">
                   <input
-                    type="text"
+                    type="number"
                     id="mobile"
                     placeholder="Add Mobile Number"
                     defaultValue={currentUser.mobile}
@@ -215,15 +217,44 @@ export default function Profile() {
                   />
                 </td>
               </tr>
+            </tbody>
+          </table>
+          {isEditable &&
+          <table className="w-full border-collapse">
+            <tbody>
+              <tr className="border-b">
+                <td className="py-2 px-4 font-medium text-green-900">
+                  Change Password
+                </td>
+              </tr>
               <tr className="border-b">
                 <td className="py-2 px-4 font-medium text-green-700">
-                  Password:
+                  Current Password:
                 </td>
                 <td className="py-2 px-4">
                   <input
                     type="password"
-                    id="password"
-                    placeholder="Change Password"
+                    id="currentPassword"
+                    placeholder="Current Password"
+                    onChange={handleChange}
+                    disabled={!isEditable}
+                    className={`w-full rounded-md p-2 focus:outline-none focus:ring-2 ${
+                      isEditable
+                        ? "bg-white border border-green-600 focus:ring-green-500"
+                        : "bg-white border border-gray-200 cursor-not-allowed"
+                    }`}
+                  />
+                </td>
+              </tr>
+              <tr className="border-b">
+                <td className="py-2 px-4 font-medium text-green-700">
+                  New Password:
+                </td>
+                <td className="py-2 px-4">
+                  <input
+                    type="password"
+                    id="newPassword"
+                    placeholder="New Password"
                     onChange={handleChange}
                     disabled={!isEditable}
                     className={`w-full rounded-md p-2 focus:outline-none focus:ring-2 ${
@@ -236,6 +267,7 @@ export default function Profile() {
               </tr>
             </tbody>
           </table>
+          }
         </div>
         <div className="flex space-x-4">
           {isEditable && (

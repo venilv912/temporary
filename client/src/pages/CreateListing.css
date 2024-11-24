@@ -43,7 +43,7 @@ form select {
 
 .add-property .second {
   width: 49%;
-} */
+}
 
 .add-property .checkbox-group {
   display: flex;
@@ -59,23 +59,23 @@ form select {
 }
 
 .add-property .file-upload {
-  display: flex; /* Use flexbox to align items horizontally */
-  align-items: center; /* Vertically align the button and input */
-  gap: 10px; /* Add some space between the file input and the button */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .add-property .file-upload input {
-  margin-top: 10; /* Remove the top margin from the input */
+  margin-top: 10;
 }
 
 .add-property .upload-button {
   background-color: #2d9c2d;
   color: #fff;
-  padding: 8px 16px; /* Adjust padding for better button appearance */
+  padding: 8px 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  height: 40px; /* Make the button height match the input height */
+  height: 40px;
 }
 
 .add-property .upload-button:hover {

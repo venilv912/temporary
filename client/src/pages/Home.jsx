@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../components/SearchBar.jsx';
 import PropertyList from '../components/PropertyList.jsx';
 import styles from '../components/style.jsx';
+import './Styles.css';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -128,40 +129,41 @@ export default function Home() {
             position: 'fixed',
             left: '0',
             top: '0',
-            zIndex: '1000',
+            zIndex: '700',
             boxShadow: '2px 0 5px rgba(0,0,0,0.1)',
             transition: 'transform 0.3s ease-in-out',
+            marginTop: '55px',
           }}
         >
-          <h3>Filters</h3>
+          <h3 className='font-semibold text-center'>Filters</h3>
           {/* Add your filter components here */}
-          <label>Price Range</label>
+          <label className='font-semibold'>Price Range</label>
           <div style={styles.priceRange}>
             <input type="number" onChange={(e) => setFilters(prev => ({ ...prev, price: e.target.value }))} placeholder="Rs.500000.0" style={styles.priceInput} />
           </div>
           <br />
           <div style={styles.filterGroup}>
-            <h3>Faciltiy</h3>
-            <div style={styles.filterOption}><input type="checkbox" name="apartments" onChange={(e) => setFilters((prev) => ({ ...prev, parking: e.target.checked ? true : false, }))} /> <label>Parking</label></div>
-            <div style={styles.filterOption}><input type="checkbox" name="apartments" onChange={(e) => setFilters((prev) => ({ ...prev, gym: e.target.checked ? true : false, }))} /> <label>Gym</label></div>
-            <div style={styles.filterOption}><input type="checkbox" name="apartments" onChange={(e) => setFilters((prev) => ({ ...prev, gardern: e.target.checked ? true : false, }))} /> <label>Garden</label></div>
-            <div style={styles.filterOption}><input type="checkbox" name="apartments" onChange={(e) => setFilters((prev) => ({ ...prev, furnished: e.target.checked ? true : false, }))} /> <label>Furnished</label></div>
+            <h3 className='font-semibold'>Faciltiy</h3>
+            <div className='gap-x-2' style={styles.filterOption}><input type="checkbox" name="apartments" onChange={(e) => setFilters((prev) => ({ ...prev, parking: e.target.checked ? true : false, }))} /> <label>Parking</label></div>
+            <div className='gap-x-2' style={styles.filterOption}><input type="checkbox" name="apartments" onChange={(e) => setFilters((prev) => ({ ...prev, gym: e.target.checked ? true : false, }))} /> <label>Gym</label></div>
+            <div className='gap-x-2' style={styles.filterOption}><input type="checkbox" name="apartments" onChange={(e) => setFilters((prev) => ({ ...prev, gardern: e.target.checked ? true : false, }))} /> <label>Garden</label></div>
+            <div className='gap-x-2' style={styles.filterOption}><input type="checkbox" name="apartments" onChange={(e) => setFilters((prev) => ({ ...prev, furnished: e.target.checked ? true : false, }))} /> <label>Furnished</label></div>
           </div>
 
           {/* Type Filter */}
           <div style={styles.filterGroup}>
-            <h3>Type</h3>
-            <div style={styles.filterOption}><input type="radio" value="rent" onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value }))} name="type" /> <label> Rent</label></div>
-            <div style={styles.filterOption}><input type="radio" value="sale" onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value }))} name="type" /> <label> Sale</label></div>
+            <h3 className='font-semibold'>Type</h3>
+            <div className='gap-x-2' style={styles.filterOption}><input type="radio" value="rent" onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value }))} name="type" /> <label> Rent</label></div>
+            <div className='gap-x-2' style={styles.filterOption}><input type="radio" value="sale" onChange={(e) => setFilters(prev => ({ ...prev, type: e.target.value }))} name="type" /> <label> Sale</label></div>
           </div>
 
           {/* Bedrooms Filter */}
           <div style={styles.filterGroup}>
-            <h3>Bedrooms</h3>
-            <div style={styles.filterOption}><input value = "1" type="radio" onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: parseInt(e.target.value) }))} name="bedrooms" /> <label>1 BHK</label></div>
-            <div style={styles.filterOption}><input value="2" type="radio" onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: parseInt(e.target.value) }))} name="bedrooms" /> <label>2 BHK</label></div>
-            <div style={styles.filterOption}><input value="3" type="radio" onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: parseInt(e.target.value) }))} name="bedrooms" /> <label>3 BHK</label></div>
-            <div style={styles.filterOption}><input value="4" type="radio" onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: parseInt(e.target.value) }))} name="bedrooms" /> <label>More Than 4 BHK</label></div>
+            <h3 className='font-semibold'>Bedrooms</h3>
+            <div className='gap-x-2' style={styles.filterOption}><input value = "1" type="radio" onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: parseInt(e.target.value) }))} name="bedrooms" /> <label>1 BHK</label></div>
+            <div className='gap-x-2' style={styles.filterOption}><input value="2" type="radio" onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: parseInt(e.target.value) }))} name="bedrooms" /> <label>2 BHK</label></div>
+            <div className='gap-x-2' style={styles.filterOption}><input value="3" type="radio" onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: parseInt(e.target.value) }))} name="bedrooms" /> <label>3 BHK</label></div>
+            <div className='gap-x-2' style={styles.filterOption}><input value="4" type="radio" onChange={(e) => setFilters(prev => ({ ...prev, bedrooms: parseInt(e.target.value) }))} name="bedrooms" /> <label>More Than 4 BHK</label></div>
           </div>
 
           <div style={{ marginTop: '10px' }}>

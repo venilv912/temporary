@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 export default function Header() {
   const {currentUser} = useSelector(state => state.user);
   return (
-    <nav className="bg-green-600 text-white p-3 fixed top-0 left-0 w-full z-50 shadow-md">
+    <nav className="bg-green-600 text-white p-3 fixed top-0 left-0 w-full z-50 shadow-md" style={{zIndex: 1000}}>
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="text-xl font-bold">
@@ -20,9 +20,9 @@ export default function Header() {
         <div className='p-5'></div>
 
         {/* Navigation Links */}
-        <ul className="flex items-center space-x-4">
-          <li><Link to="/" className="text-white text-sm hover:text-gray-200">Home</Link></li>
-          <li><Link to="/about" className="text-white text-sm hover:text-gray-200">About</Link></li>
+        <ul className="flex items-center space-x-7">
+          <li><Link to="/about" className='text-white font-semibold text-md hover:text-gray-200'>About</Link></li>
+          {currentUser && <li><Link to="/my-listings" className='className="text-white font-semibold text-md hover:text-gray-200'>My Properties</Link></li>}
           <Link to="/profile">{currentUser ? (<img className='rounded-full h-7 w-7 object-cover' referrerPolicy="no-referrer" src={currentUser.avatar} alt='profile'/>): (<li><div className="bg-green-500 text-white px-3 py-2 rounded-full text-sm hover:bg-green-400">Sign in</div></li>)}</Link>
           {/*referrerPolicy="no-referrer"*/}
         </ul>

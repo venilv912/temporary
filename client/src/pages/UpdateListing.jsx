@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CreateListing.css";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase.js';
 import { useSelector } from 'react-redux';
 import './Styles.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CreateListing = () => {
   const {currentUser} = useSelector(state => state.user);
@@ -30,6 +30,23 @@ const CreateListing = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    const fetchListing = async () => {
+        const listingId = params.listingId;
+        const res = await fetch(`/api/listing/get/${listingId}`);
+        const data = await res.json();
+        if (data.success === false)
+        {
+            console.log(data.message);
+            return;
+        }
+        setFormData(data);
+    }
+
+    fetchListing();
+  }, []);
 
   const handleImageSubmit = (e) => {
     if (files.length>0 && files.length+formData.imageUrls.length <7)
@@ -147,7 +164,7 @@ const CreateListing = () => {
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/listing/create', {
+      const res = await fetch(`/api/listing/update/${params.listingId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -174,7 +191,7 @@ const CreateListing = () => {
     <div className={`add-property`}>
     <div className="add-property-page">
       <main className="form-container">
-        <h2 className="text-lg"><strong>Add Property</strong></h2>
+        <h2 className="text-lg"><strong>Update Property</strong></h2>
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row justify-between">
             <div className={`first`}>
           <input
@@ -307,7 +324,6 @@ const CreateListing = () => {
               type="file"
               id="images"
               accept="image/*"
-              required
               multiple
             />
             <button type='button' disabled={uploading} onClick={handleImageSubmit} className="upload-button self-center">
@@ -349,7 +365,7 @@ const CreateListing = () => {
             </select>
           </div>
           <button disabled={loading || uploading} type="submit" className="submit-button">
-            {loading ? 'Adding...' : 'Add Property'}
+            {loading ? 'Updating...' : 'Update Property'}
           </button>
             {error && <p className="text-red-700 text-center">{error}</p>}
           </div>

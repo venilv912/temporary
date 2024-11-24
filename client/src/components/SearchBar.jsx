@@ -14,7 +14,7 @@ const SearchBar = ({ searchQuery, setSearchQuery, setFiltersVisible }) => (
         <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Find Your Dream Home</h1>
         <input
           type="text"
-          placeholder="Enter an address, city, or ZIP code"
+          placeholder="Enter Name, City, or ZIP code"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{ padding: '0.5rem', width: '300px', marginRight: '0.5rem', color: 'black' }}

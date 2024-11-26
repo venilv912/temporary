@@ -45,7 +45,7 @@ const Listing = () => {
     listingId: params.listingId,
     date: "",
     visitSlot: "",
-    type: "pending"
+    status: "pending"
   });
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -296,7 +296,10 @@ const Listing = () => {
         body: JSON.stringify({
           ...formData,
           buyerId: currentUser._id,
-          sellerId: listing.userRef
+          sellerId: listing.userRef,
+          buyerName: currentUser.username,
+          name: listing.name,
+          image: listing.imageUrls[0]
         }),
       });
 

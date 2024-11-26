@@ -59,10 +59,11 @@ export default function MyListings() {
 
   return (
     <div className="Manage_Listings">
-      <h2 className="font-semibold text-2xl">Manage Your Listings</h2>
-      {error && <p className='text-red-700 mt-5'>Error showing Properties</p>}
+      <h2 className="font-semibold text-2xl">My Properties</h2>
+      {loading && <p className='text-center my-7 text-2xl font-semibold text-gray-700'>Loading...</p>}
+      {error && <p className='text-center my-7 text-2xl font-semibold text-gray-700'>Error showing Properties</p>}
       {userListings && (userListings.length < 1) &&
-        <div className='text-gray-700' style={{padding: 225}}>No Properties to Display</div>
+        <div className='text-gray-700 font-semibold' style={{padding: 225}}>No Properties to Display</div>
       }
       <div className="properties-grid">
         {userListings && userListings.length>0 &&

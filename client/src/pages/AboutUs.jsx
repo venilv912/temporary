@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import './AboutUs.css';
 
 import Venil from '../assets/Venil.jpg' 
-import Parth from '../assets/Parth.jpeg'
-import Chintan from '../assets/Chintan.jpeg'
+import Parth from '../assets/parth.jpeg'
+import Chintan from '../assets/chintan.jpeg'
 import Mihir from '../assets/Mihir.jpg'
 import Meghavi from '../assets/Meghavi.jpeg'
 import Ayush from '../assets/Ayush.jpeg'
-import  Harshal from '../assets/Harshal.jpeg'
-import Jeet from '../assets/Jeet.jpeg'
+import  Harshal from '../assets/harshal.jpeg'
+import Jeet from '../assets/jeet.jpeg'
 import Shruti from '../assets/Shruti.jpg'
 import Ashutosh from '../assets/Ashutosh.jpeg'
 

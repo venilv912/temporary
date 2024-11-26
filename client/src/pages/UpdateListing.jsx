@@ -200,6 +200,7 @@ const CreateListing = () => {
           <textarea
             placeholder="Description"
             id = 'description'
+            maxLength='200'
             required
             onChange={handleChange}
             value = {formData.description}
@@ -208,6 +209,7 @@ const CreateListing = () => {
             type="text"
             placeholder="Address"
             id = 'address'
+            maxLength='100'
             required
             onChange={handleChange}
             value = {formData.address}
@@ -216,6 +218,7 @@ const CreateListing = () => {
             type="text"
             placeholder="City"
             id = 'city'
+            maxLength='25'
             required
             onChange={handleChange}
             value={formData.city}
@@ -224,6 +227,8 @@ const CreateListing = () => {
             type='number'
             placeholder="Pin-Code"
             id = 'pinCode'
+            min='100000'
+            max='999999'
             required
             onChange={handleChange}
             value={formData.pinCode}
@@ -288,7 +293,8 @@ const CreateListing = () => {
             <input
               type="number"
               id="bedrooms"
-              min="1"
+              min='1'
+              max='15'
               required
               onChange={handleChange}
               value={formData.bedrooms}

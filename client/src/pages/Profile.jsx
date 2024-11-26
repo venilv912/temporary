@@ -205,6 +205,8 @@ export default function Profile() {
                   <input
                     type="number"
                     id="mobile"
+                    min='1000000000'
+                    max='9999999999'
                     placeholder="Add Mobile Number"
                     defaultValue={((currentUser.mobile==='9999999999')?(''):(currentUser.mobile))}
                     onChange={handleChange}

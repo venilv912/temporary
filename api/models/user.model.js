@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     mobile: {
         type: String,
-        default: "",
+        default: "9999999999",
     },
 }, {timestamps: true});
 

@@ -27,7 +27,6 @@
   color: black;
 }
 .transaction-page .ImageH{
-  background-image: url(../src/components/image.png);
   background-size: contain; /* Scale the image to fit inside the container */
   background-repeat: no-repeat; /* Prevent the image from repeating */
   background-position: center; /* Center the image within the container */

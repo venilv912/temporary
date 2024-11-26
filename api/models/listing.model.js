@@ -54,6 +54,10 @@ const listingSchema = new mongoose.Schema(
             type: Array,
             required: true,
         },
+        tokenAmount: {
+            type: Number,
+            required: true,
+        },
         userRef: {
             type: String,
             required: true,

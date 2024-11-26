@@ -21,7 +21,7 @@ export default function Header() {
 
         {/* Navigation Links */}
         <ul className="flex items-center space-x-7">
-          <li><Link to="/about" className='text-white font-semibold text-md hover:text-gray-200'>About</Link></li>
+          <li><Link to="/about-us" className='text-white font-semibold text-md hover:text-gray-200'>About Us</Link></li>
           {currentUser && <li><Link to="/my-listings" className='className="text-white font-semibold text-md hover:text-gray-200'>My Properties</Link></li>}
           <Link to="/profile">{currentUser ? (<img className='rounded-full h-7 w-7 object-cover' referrerPolicy="no-referrer" src={currentUser.avatar} alt='profile'/>): (<li><div className="bg-green-500 text-white px-3 py-2 rounded-full text-sm hover:bg-green-400">Sign in</div></li>)}</Link>
           {/*referrerPolicy="no-referrer"*/}

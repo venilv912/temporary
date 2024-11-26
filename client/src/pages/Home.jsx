@@ -167,7 +167,7 @@ export default function Home() {
           </div>
 
           <div style={{ marginTop: '10px' }}>
-            <button onClick={() => {
+            <button className='rounded-md' onClick={() => {
               setFiltersVisible(false);
               applyFilters();
             }} style={{ padding: '0.5rem 1rem', backgroundColor: '#28a745', color: 'white', border: 'none' }}>
@@ -175,7 +175,7 @@ export default function Home() {
             </button>
           </div>
           <div style={{ marginTop: '10px' }}>
-            <button
+            <button className='rounded-md'
               onClick={() => {
                 setFilters({ price: 500000000000, type: null, bedrooms: null, gym: false, parking: false, gardern: false, furnished: false }); // Reset filters
                 fetchProperties(searchQuery).then(() => {

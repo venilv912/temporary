@@ -23,6 +23,7 @@ const CreateListing = () => {
     garden: false,
     type: 'sale',
     imageUrls: [],
+    tokenAmount: 5000,
     visitSlots: [],
   });
   const [imageUploadError, setImageUploadError] = useState(false);
@@ -115,19 +116,11 @@ const CreateListing = () => {
       });
     };
 
-    if (e.target.type === 'text' || e.target.id === 'pinCode' || e.target.type === 'textarea')
+    if (e.target.type === 'text' || e.target.type === 'number' || e.target.type === 'textarea')
     {
       setFormData({
         ...formData,
         [e.target.id]: e.target.value
-      });
-    };
-
-    if (e.target.type === 'number' && e.target.id !== 'pinCode') {
-      const numericValue = e.target.value === '' ? 0 : Number(e.target.value);
-      setFormData({
-        ...formData,
-        [e.target.id]: numericValue
       });
     };
   };
@@ -295,8 +288,20 @@ const CreateListing = () => {
               onChange={handleChange}
               value={formData.price}
             />
-            <label>Regular Price (in {formData.type==='sale' ? '₹' : '₹/month'})</label>
+            <label>Price (in {formData.type==='sale' ? '₹' : '₹/month'})</label>
           </div>
+            <div className="price-input">
+              <input
+                type="number"
+                id="tokenAmount"
+                min="5000"
+                max="1000000"
+                required
+                onChange={handleChange}
+                value={formData.tokenAmount}
+              />
+              <label>Token Amount (in ₹)</label>
+            </div>
             </div>
             <div className={`second`}>
             <div className="file-upload flex flex-col">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Heart } from 'lucide-react';
-import pop from './photos.js';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import furnishedIcon from '../assets/furnished-icon.png';
 import parkingIcon from '../assets/parking-icon.png';
 import locationIcon from '../assets/location-icon.png';
@@ -9,21 +9,13 @@ import gardenIcon from '../assets/garden-icon.png';
 import gymIcon from '../assets/gym-icon.png';
 
 const Listing = () => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => (listing ? (prevIndex === 0 ? listing.imageUrls.length - 1 : prevIndex - 1): 0));
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (listing ? (prevIndex === listing.imageUrls.length - 1 ? 0 : prevIndex + 1): 0));
-  };
-  
-  const params = useParams();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
+  const [bookSlotError, setBookSlotError] = useState(null);
+  const [bookSlotLoading, setBookSlotLoading] = useState(false);
+  const { currentUser }  = useSelector((state) => state.user);
+  const params = useParams();
   useEffect(() => {
     const fetchListing = async() => {
       try {
@@ -48,6 +40,47 @@ const Listing = () => {
 
     fetchListing();
   }, [params.listingId]);
+
+  const [formData, setFormData] = useState({
+    listingId: params.listingId,
+    date: "",
+    visitSlot: "",
+    type: "pending"
+  });
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = new useNavigate();
+  const [dates, setDates] = useState([]);
+
+  useEffect(() => {
+    const generateDates = () => {
+      const today = new Date();
+      const nextDates = [];
+      for (let i = 1; i < 8; i++) {
+        const nextDate = new Date();
+        nextDate.setDate(today.getDate() + i);
+
+        // Format date as DD/MM/YYYY
+        const formattedDate = `${String(nextDate.getDate()).padStart(2, "0")}/${
+          String(nextDate.getMonth() + 1).padStart(2, "0")
+        }/${nextDate.getFullYear()}`;
+
+        nextDates.push(formattedDate);
+      }
+      setDates(nextDates);
+    };
+
+    generateDates();
+  }, []);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => (listing ? (prevIndex === 0 ? listing.imageUrls.length - 1 : prevIndex - 1): 0));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => (listing ? (prevIndex === listing.imageUrls.length - 1 ? 0 : prevIndex + 1): 0));
+  };
+  
 
   const styles = {
     container: {
@@ -168,6 +201,7 @@ const Listing = () => {
       padding: '32px',
       borderRadius: '8px',
       boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      marginBottom: '32px',
     },
     descriptionTitle: {
       fontSize: '24px',
@@ -238,6 +272,48 @@ const Listing = () => {
         },
   };
 
+  const handleLogin = () => {
+    alert('Sign In to access further features!');
+    navigate('/login');
+  };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  const handleBookVisitSlot = async (e) => {
+    e.preventDefault();
+    setBookSlotLoading(true);
+    setBookSlotError(null);
+
+    try {
+      const response = await fetch(`/api/property/book-visit-slot/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          buyerId: currentUser._id,
+          sellerId: listing.userRef
+        }),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        setBookSlotLoading(false);
+        alert("Slot booked successfully!");
+        setFormData({ buyerId: currentUser._id, listingId: params.listingId, date: "", visitSlot: "", type: "pending" });
+      } else {
+        setBookSlotLoading(false);
+        setBookSlotError(result.message || "An error occurred while booking the slot.");
+      }
+    } catch (err) {
+      setBookSlotLoading(false);
+      setBookSlotError("Failed to book the slot. Please try again.");
+    }
+  };
 
   return (
     <main>
@@ -293,8 +369,12 @@ const Listing = () => {
           <div style={styles.headerSection}>
             <div>
               <h1 style={styles.title}>{listing.name}</h1>
-              <p style={styles.address}>{listing.address}</p>
+              <div className='flex gap-1'>
+                <img src={locationIcon} className='h-5' alt="location icon" />
+                <p style={styles.address}>{listing.address}</p>
+              </div>
             </div>
+            {(currentUser && (listing.userRef !== currentUser._id)) ? (
             <button
               onClick={() => setIsWishlisted(!isWishlisted)}
               style={styles.wishlistButton}
@@ -305,7 +385,20 @@ const Listing = () => {
                 size={20}
                 />
               {isWishlisted ? 'Wishlisted' : 'Add to Wishlist'}
-            </button>
+            </button>): (!currentUser)? (
+                <button
+                onClick={handleLogin}
+                style={styles.wishlistButton}
+              >
+                <Heart
+                  color={isWishlisted ? 'white' : '#16a34a'}
+                  fill={isWishlisted ? 'white' : 'none'}
+                  size={20}
+                  />
+                {isWishlisted ? 'Wishlisted' : 'Add to Wishlist'}
+              </button>):(
+                <div></div>
+              )}
           </div>
 
 
@@ -351,6 +444,77 @@ const Listing = () => {
               </div>
             </div>
           </div>
+          
+          {(currentUser && (listing.userRef !== currentUser._id)) ? (
+          <div style={styles.descriptionCard} className='flex'>
+          <form onSubmit={handleBookVisitSlot}>
+          <div style={{marginRight: 400}}>
+            <h2 style={styles.descriptionTitle}>Book Visit Slots</h2>
+            <div className='mb-6'>
+            <label htmlFor="date" className="block mb-1 font-semibold">Select Date:</label>
+            <select
+              id="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+              className="p-2 border rounded"
+              style={{maxWidth: 200}}
+            >
+              <option value="">
+                Choose a date
+              </option>
+              {dates.map((date) => (
+                <option key={date} value={date}>
+                  {date}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className='mb-6'>
+            <label htmlFor="visitSlot" className="block mb-1 font-semibold">Select Visit Slot:</label>
+            <select
+              id="visitSlot"
+              value={formData.visitSlot}
+              onChange={handleChange}
+              required
+              className="p-2 border rounded"
+              style={{maxWidth: 200}}
+            >
+              <option value="">
+                Choose visit slot
+              </option>
+              {listing.visitSlots.map((visitSlot) => (
+                <option key={visitSlot} value={visitSlot}>
+                  {visitSlot}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            disabled={bookSlotLoading}
+            type="submit"
+            className='btn bg-green-600 p-2 text-md text-white font-semibold rounded-md mb-3'>
+            {bookSlotLoading ? 'Booking...': 'Book Visit Slot'}
+          </button>
+          {bookSlotError && <p className="text-red-700">{bookSlotError}</p>}
+          </div>
+          </form>
+          <div>
+          <h2 style={styles.descriptionTitle}>Pay Token Amount</h2>
+          <p className='font-semibold text-xl mb-6'>Token Amount: ₹ {listing.tokenAmount}</p>
+          <Link to={`/transaction/${currentUser._id}/${listing.userRef}/${listing._id}`}
+            className='btn bg-green-600 p-2 text-md text-white font-semibold rounded-md mb-3'>
+            Pay Token Amount
+          </Link>
+          </div>
+          </div>
+          ): (!currentUser)? (
+            <div className='flex gap-4'>
+            <button onClick={handleLogin} className='btn bg-green-600 p-2 text-lg text-white font-semibold rounded-md'>Book Visit Slots</button>
+            <button onClick={handleLogin} className='btn bg-green-600 p-2 text-lg text-white font-semibold rounded-md'>Pay Token Amount</button>
+          </div>):(
+            <div></div>
+          )}
         </div>
       </div>
       </div>

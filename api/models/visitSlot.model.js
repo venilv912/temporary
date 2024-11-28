@@ -18,6 +18,14 @@ const visitSlotSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        buyerContact: {
+            type: String,
+            required: true,
+        },
+        sellerContact: {
+            type: String,
+            required: true,
+        },
         name: {
             type: String,
             required: true,

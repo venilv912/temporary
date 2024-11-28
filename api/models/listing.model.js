@@ -62,6 +62,10 @@ const listingSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        contact: {
+            type: String,
+            required: true,
+        },
         visitSlots: {
             type: Array,
             required: true,

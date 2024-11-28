@@ -137,3 +137,28 @@ export const getUserPendingVisitors = async (req, res, next) => {
         return next(errorHandler(401, 'You can only view your own pending visitors!'));
     }
 };
+
+export const updateVisitSlot = async (req, res, next) => {
+    const visitSlot = await VisitSlot.findById(req.params.id);
+
+    if (!visitSlot)
+    {
+        return next (errorHandler(404, 'Visit Slot Not Found!'));
+    }
+
+    if (req.user.id !== visitSlot.buyerId && req.user.id !== visitSlot.sellerId)
+    {
+        return next(errorHandler(401, 'You can only update your own visit slots!'));
+    }
+
+    try {
+        await VisitSlot.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new: true}
+        );
+        res.status(200).json(visitSlot);
+    } catch (error) {
+        next(error);
+    }
+};

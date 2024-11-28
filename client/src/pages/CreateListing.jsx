@@ -147,7 +147,8 @@ const CreateListing = () => {
         },
         body: JSON.stringify({
           ...formData,
-          userRef: currentUser._id
+          userRef: currentUser._id,
+          contact: currentUser.mobile,
         }),
       });
       const data = await res.json();
